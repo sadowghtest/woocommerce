@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { Button } from '@wordpress/components';
+import { Button, CheckboxControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { chevronDown, chevronUp } from '@wordpress/icons';
 import classNames from 'classnames';
@@ -18,11 +18,18 @@ export const TreeItem = forwardRef( function ForwardedTreeItem(
 	props: TreeItemProps,
 	ref: React.ForwardedRef< HTMLLIElement >
 ) {
-	const { item, treeItemProps, headingProps, treeProps, expander, getLabel } =
-		useTreeItem( {
-			...props,
-			ref,
-		} );
+	const {
+		item,
+		treeItemProps,
+		headingProps,
+		treeProps,
+		expander,
+		selection,
+		getLabel,
+	} = useTreeItem( {
+		...props,
+		ref,
+	} );
 
 	return (
 		<li
@@ -36,13 +43,34 @@ export const TreeItem = forwardRef( function ForwardedTreeItem(
 				{ ...headingProps }
 				className="experimental-woocommerce-tree-item__heading"
 			>
-				<div className="experimental-woocommerce-tree-item__label">
+				<label className="experimental-woocommerce-tree-item__label">
+					{ selection.multiple ? (
+						<CheckboxControl
+							indeterminate={
+								selection.checkedStatus === 'indeterminate'
+							}
+							checked={ selection.checkedStatus === 'checked' }
+							onChange={ selection.onSelectChild }
+						/>
+					) : (
+						<input
+							type="radio"
+							checked={ selection.checkedStatus === 'checked' }
+							className="components-radio-control__input"
+							onChange={ ( event ) =>
+								selection.onSelectChild(
+									event.currentTarget.checked
+								)
+							}
+						/>
+					) }
+
 					{ typeof getLabel === 'function' ? (
 						getLabel( item )
 					) : (
 						<span>{ item.data.label }</span>
 					) }
-				</div>
+				</label>
 
 				{ Boolean( item.children?.length ) && (
 					<div className="experimental-woocommerce-tree-item__expander">
