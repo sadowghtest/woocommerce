@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import { useInstanceId } from '@wordpress/compose';
 
 /**
  * Internal dependencies
@@ -48,6 +49,10 @@ export function useTreeItem( {
 		isHighlighted,
 	} );
 
+	const subTreeId = `experimental-woocommerce-tree__group-${ useInstanceId(
+		useTreeItem
+	) }`;
+
 	return {
 		item,
 		level: nextLevel,
@@ -57,17 +62,30 @@ export function useTreeItem( {
 		getLabel,
 		treeItemProps: {
 			...props,
+			role: 'none',
 		},
 		headingProps: {
+			role: 'treeitem',
+			'aria-selected': selection.checkedStatus !== 'unchecked',
+			'aria-expanded': item.children.length
+				? expander.expanded
+				: undefined,
+			'aria-owns':
+				item.children.length && expander.expanded
+					? subTreeId
+					: undefined,
 			style: {
 				paddingLeft: nextHeadingPaddingLeft,
 			},
 		},
 		treeProps: {
+			id: subTreeId,
 			items: item.children,
 			level: nextLevel,
 			multiple: selection.multiple,
 			selected: selection.selected,
+			role: 'group',
+			'aria-label': item.data.label,
 			getItemLabel: getLabel,
 			isItemExpanded: isExpanded,
 			isItemHighlighted: highlighter.isHighlighted,
