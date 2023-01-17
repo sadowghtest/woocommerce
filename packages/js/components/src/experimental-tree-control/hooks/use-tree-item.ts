@@ -7,6 +7,7 @@
  */
 import { TreeItemProps } from '../types';
 import { useExpander } from './use-expander';
+import { useHighlighter } from './use-highlighter';
 import { useSelection } from './use-selection';
 
 export function useTreeItem( {
@@ -17,6 +18,7 @@ export function useTreeItem( {
 	index,
 	getLabel,
 	isExpanded,
+	isHighlighted,
 	onSelect,
 	onRemove,
 	...props
@@ -39,11 +41,19 @@ export function useTreeItem( {
 		onRemove,
 	} );
 
+	const highlighter = useHighlighter( {
+		item,
+		checkedStatus: selection.checkedStatus,
+		multiple,
+		isHighlighted,
+	} );
+
 	return {
 		item,
 		level: nextLevel,
 		expander,
 		selection,
+		highlighter,
 		getLabel,
 		treeItemProps: {
 			...props,
@@ -60,6 +70,7 @@ export function useTreeItem( {
 			selected: selection.selected,
 			getItemLabel: getLabel,
 			isItemExpanded: isExpanded,
+			isItemHighlighted: highlighter.isHighlighted,
 			onSelect: selection.onSelectChildren,
 			onRemove: selection.onRemoveChildren,
 		},

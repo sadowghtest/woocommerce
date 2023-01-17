@@ -15,6 +15,7 @@ export function useTree( {
 	selected,
 	getItemLabel,
 	isItemExpanded,
+	isItemHighlighted,
 	onSelect,
 	onRemove,
 	...props
@@ -31,6 +32,7 @@ export function useTree( {
 			selected,
 			getLabel: getItemLabel,
 			isExpanded: isItemExpanded,
+			isHighlighted: isItemHighlighted,
 			onSelect,
 			onRemove,
 		},
