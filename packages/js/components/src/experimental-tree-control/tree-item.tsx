@@ -18,7 +18,7 @@ export const TreeItem = forwardRef( function ForwardedTreeItem(
 	props: TreeItemProps,
 	ref: React.ForwardedRef< HTMLLIElement >
 ) {
-	const { item, treeItemProps, headingProps, treeProps, expander } =
+	const { item, treeItemProps, headingProps, treeProps, expander, getLabel } =
 		useTreeItem( {
 			...props,
 			ref,
@@ -37,7 +37,11 @@ export const TreeItem = forwardRef( function ForwardedTreeItem(
 				className="experimental-woocommerce-tree-item__heading"
 			>
 				<div className="experimental-woocommerce-tree-item__label">
-					<span>{ item.data.label }</span>
+					{ typeof getLabel === 'function' ? (
+						getLabel( item )
+					) : (
+						<span>{ item.data.label }</span>
+					) }
 				</div>
 
 				{ Boolean( item.children?.length ) && (
