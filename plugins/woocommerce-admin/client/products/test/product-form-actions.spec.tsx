@@ -54,7 +54,7 @@ jest.mock( '../use-product-helper', () => {
 	};
 } );
 jest.mock( '@woocommerce/navigation', () => ( {
-	usePreventLeavingPage: jest.fn(),
+	useConfirmUnsavedChanges: jest.fn(),
 } ) );
 jest.mock(
 	'~/customer-effort-score-tracks/use-customer-effort-score-exit-page-tracker',

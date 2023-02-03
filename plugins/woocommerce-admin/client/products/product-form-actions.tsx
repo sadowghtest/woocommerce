@@ -25,7 +25,7 @@ import { store } from '@wordpress/viewport';
  * Internal dependencies
  */
 import { preventLeavingProductForm } from './utils/prevent-leaving-product-form';
-import { usePreventLeavingPage } from '@woocommerce/navigation';
+import { useConfirmUnsavedChanges } from '@woocommerce/navigation';
 import { WooHeaderItem } from '~/header/utils';
 import { useProductHelper } from './use-product-helper';
 import './product-form-actions.scss';
@@ -48,7 +48,7 @@ export const ProductFormActions: React.FC = () => {
 	const { isDirty, isValidForm, values, resetForm } =
 		useFormContext< Product >();
 
-	usePreventLeavingPage( isDirty, preventLeavingProductForm );
+	useConfirmUnsavedChanges( isDirty, preventLeavingProductForm );
 
 	useCustomerEffortScoreExitPageTracker(
 		! values.id ? 'new_product' : 'editing_new_product',
