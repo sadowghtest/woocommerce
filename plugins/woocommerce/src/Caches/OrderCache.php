@@ -35,22 +35,10 @@ class OrderCache extends ObjectCache {
 	 * @return string[]|null An array of error messages, or null if the object is valid.
 	 */
 	protected function validate( $object ): ?array {
-		if ( ! $object instanceof \WC_Abstract_Legacy_Order ) {
-			return array( 'The supplied order is not an instance of WC_Order, ' . gettype( $object ) );
+		if ( ! $object instanceof \WC_Abstract_Order ) {
+			return array( 'The supplied order is not an instance of WC_Abstract_Order, ' . gettype( $object ) );
 		}
 
-		return null;
-	}
-
-	/**
-	 * Get an object from an authoritative data store.
-	 * This is used by 'get' if the object isn't cached and no custom object retrieval callback is suupplied.
-	 *
-	 * @param int|string $id The id of the object to get.
-	 *
-	 * @return array|object|null The retrieved object, or null if it's not possible to retrieve an object by the given id.
-	 */
-	protected function get_from_datastore( $id ) {
 		return null;
 	}
 }
