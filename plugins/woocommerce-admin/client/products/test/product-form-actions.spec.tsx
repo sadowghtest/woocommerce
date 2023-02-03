@@ -1,10 +1,8 @@
 /**
  * External dependencies
  */
-import { PropsWithChildren } from 'react';
 import { render, waitFor, screen, within } from '@testing-library/react';
 import { Fragment } from '@wordpress/element';
-import { useSelect, useDispatch } from '@wordpress/data';
 import { Form, FormContext } from '@woocommerce/components';
 import { Product } from '@woocommerce/data';
 import { recordEvent } from '@woocommerce/tracks';
@@ -55,7 +53,9 @@ jest.mock( '../use-product-helper', () => {
 		} ),
 	};
 } );
-jest.mock( '~/hooks/usePreventLeavingPage' );
+jest.mock( '@woocommerce/navigation', () => ( {
+	usePreventLeavingPage: jest.fn(),
+} ) );
 jest.mock(
 	'~/customer-effort-score-tracks/use-customer-effort-score-exit-page-tracker',
 	() => ( {

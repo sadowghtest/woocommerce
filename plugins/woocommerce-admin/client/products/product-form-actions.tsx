@@ -25,7 +25,7 @@ import { store } from '@wordpress/viewport';
  * Internal dependencies
  */
 import { preventLeavingProductForm } from './utils/prevent-leaving-product-form';
-import usePreventLeavingPage from '~/hooks/usePreventLeavingPage';
+import { usePreventLeavingPage } from '@woocommerce/navigation';
 import { WooHeaderItem } from '~/header/utils';
 import { useProductHelper } from './use-product-helper';
 import './product-form-actions.scss';
