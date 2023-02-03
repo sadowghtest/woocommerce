@@ -9,6 +9,7 @@ import {
 } from '@woocommerce/data';
 import { registerPlugin } from '@wordpress/plugins';
 import { useDispatch } from '@wordpress/data';
+import { useConfirmUnsavedChanges } from '@woocommerce/navigation';
 import { useFormContext } from '@woocommerce/components';
 import { useParams } from 'react-router-dom';
 import { useState } from '@wordpress/element';
@@ -17,7 +18,6 @@ import { useState } from '@wordpress/element';
  * Internal dependencies
  */
 import { preventLeavingProductForm } from './utils/prevent-leaving-product-form';
-import { useConfirmUnsavedChanges } from '@woocommerce/navigation';
 import { WooHeaderItem } from '~/header/utils';
 import './product-form-actions.scss';
 

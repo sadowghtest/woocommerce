@@ -14,7 +14,7 @@ import { registerPlugin } from '@wordpress/plugins';
 import { useFormContext } from '@woocommerce/components';
 import { Product } from '@woocommerce/data';
 import { recordEvent } from '@woocommerce/tracks';
-import { navigateTo } from '@woocommerce/navigation';
+import { navigateTo, useConfirmUnsavedChanges } from '@woocommerce/navigation';
 import { useSelect } from '@wordpress/data';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore No types for this exist yet.
@@ -25,7 +25,6 @@ import { store } from '@wordpress/viewport';
  * Internal dependencies
  */
 import { preventLeavingProductForm } from './utils/prevent-leaving-product-form';
-import { useConfirmUnsavedChanges } from '@woocommerce/navigation';
 import { WooHeaderItem } from '~/header/utils';
 import { useProductHelper } from './use-product-helper';
 import './product-form-actions.scss';
